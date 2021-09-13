@@ -1,35 +1,29 @@
-import React, { Fragment } from "react";
+import React from "react";
 import _ from "lodash";
 import Book from "./Book";
-import { Container, Row } from "react-bootstrap";
-const BookList = ({ books, setbooks }) => {
-
+import PropTypes from "prop-types";
+const BooksList = ({ books, setbooks }) => {
   const handleRemoveBook = (id) => {
     setbooks(books.filter((book) => book.id !== id));
   };
-
+console.log(books)
   return (
-    <Fragment>
-      <Container className="mt-5">
-        <Row>
-          {!_.isEmpty(books) ? (
-            books.map((book) => (
-              <Book
-                key={book.id}
-                {...book}
-                handleRemoveBook={handleRemoveBook}
-               
-              />
-            ))
-          ) : (
-            <p className="message">
-              No books available. Please add some books.
-            </p>
-          )}
-        </Row>
-      </Container>
-    </Fragment>
+    <React.Fragment>
+      <div className="book-list">
+        {!_.isEmpty(books) ? (
+          books.map((book) => (
+            <Book key={book.id} {...book} handleRemoveBook={handleRemoveBook} />
+          ))
+        ) : (
+          <p className="message">No books available. Please add some books.</p>
+        )}
+      </div>
+    </React.Fragment>
   );
 };
 
-export default BookList;
+BooksList.propType = {
+  books: PropTypes.array,
+  setbooks: PropTypes.func,
+};
+export default BooksList;

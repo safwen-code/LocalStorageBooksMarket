@@ -5,10 +5,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbars from "./Components/Navbars";
 
 import AddBooks from "./Components/AddBooks";
-import Booklist from "./Components/Booklist";
-import useLocalStorage from "./Hooks/useLocalStorage";
+import useLocalStorages from "./Hooks/useLocalStorages";
+import Edite from "./Components/Edite";
+import BooksList from "./Components/BookList";
 const App = () => {
-  const [books, setbooks] = useLocalStorage("books", []);
+  const [books, setbooks] = useLocalStorages("books", []);
   return (
     <Router>
       <Navbars />
@@ -16,7 +17,7 @@ const App = () => {
         <Container>
           <Route
             render={(props) => (
-              <Booklist {...props} books={books} setbooks={setbooks} />
+              <BooksList {...props} books={books} setbooks={setbooks}s />
             )}
             path="/"
             exact={true}
@@ -25,6 +26,12 @@ const App = () => {
             path="/addDoc"
             render={(props) => (
               <AddBooks {...props} books={books} setbooks={setbooks} />
+            )}
+          />
+          <Route
+            path="/Edite/:id"
+            render={(props) => (
+              <Edite {...props} books={books} setbooks={setbooks} />
             )}
           />
         </Container>

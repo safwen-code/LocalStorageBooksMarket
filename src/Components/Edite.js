@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const Edite = ({ books, setbooks, history }) => {
   const { id } = useParams();
-  //ind out the particular book match to id 
+  //find out the particular book match to id 
   const bookToEdite = books.find((book) => book.id === id);
   const handleOnSubmit = (book) => {
     const filtredBook = books.filter((book) => book.id !== id);
