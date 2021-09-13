@@ -26,12 +26,17 @@ const Book = ({
             <div>Date: {new Date(date).toDateString()}</div>
           </div>
           <Button
+            className="mt-3 ms-2"
             variant="primary"
             onClick={() => history.push(`/Edite/${id}`)}
           >
             Edit
           </Button>{" "}
-          <Button variant="danger" onClick={() => handleRemoveBook(id)}>
+          <Button
+            className="mt-3"
+            variant="danger"
+            onClick={() => handleRemoveBook(id)}
+          >
             Delete
           </Button>
         </Card.Body>
