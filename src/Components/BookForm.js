@@ -3,12 +3,17 @@ import { Form, Button, Container, Alert } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
 const BookForm = (props) => {
-  const [book, setBook] = useState({
-    bookname: props.book ? props.book.bookname : "",
-    author: props.book ? props.book.author : "",
-    quantity: props.book ? props.book.quantity : "",
-    price: props.book ? props.book.price : "",
-    date: props.book ? props.book.date : "",
+  //lazy usestate
+  //Because of this change, the code for setting state will not be executed on every re-render of the applicatio
+  const [book, setBook] = useState(() => {
+    return {
+      bookname: props.book ? props.book.bookname : "",
+      author: props.book ? props.book.author : "",
+      quantity: props.book ? props.book.quantity : "",
+      price: props.book ? props.book.price : "",
+      date: props.book ? props.book.date : "",
+    };
+    //checking if the book prop is passed or not
   });
 
   const [errorMsg, setErrorMsg] = useState("");
@@ -18,7 +23,7 @@ const BookForm = (props) => {
     event.preventDefault();
     const values = [bookname, author, price, quantity];
     let errorMsg = "";
-
+    //checking if the user has entered all the details using the every array method
     const allFieldsFilled = values.every((field) => {
       const value = `${field}`.trim();
       return value !== "" && value !== "0";
@@ -45,6 +50,7 @@ const BookForm = (props) => {
     const { name, value } = event.target;
     switch (name) {
       case "quantity":
+        //checking to see if the entered value is an integer without a decimal point
         if (value === "" || parseInt(value) === +value) {
           setBook((prevState) => ({
             ...prevState,
@@ -120,7 +126,11 @@ const BookForm = (props) => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Button variant="outline-primary" type="submit" className="mt-3 d-flex justify-content-center">
+        <Button
+          variant="outline-primary"
+          type="submit"
+          className="mt-3 d-flex justify-content-center"
+        >
           Submit
         </Button>
       </Form>

@@ -3,6 +3,7 @@ import _ from "lodash";
 import Book from "./Book";
 import { Container, Row } from "react-bootstrap";
 const BookList = ({ books, setbooks }) => {
+
   const handleRemoveBook = (id) => {
     setbooks(books.filter((book) => book.id !== id));
   };
@@ -13,13 +14,12 @@ const BookList = ({ books, setbooks }) => {
         <Row>
           {!_.isEmpty(books) ? (
             books.map((book) => (
-              
-                <Book
-                  key={book.id}
-                  {...book}
-                  handleRemoveBook={handleRemoveBook}
-                />
-              
+              <Book
+                key={book.id}
+                {...book}
+                handleRemoveBook={handleRemoveBook}
+               
+              />
             ))
           ) : (
             <p className="message">
